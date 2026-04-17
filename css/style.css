@@ -1161,6 +1161,8 @@ h1, h2, h3, h4, h5 { font-family: var(--font-d); font-weight: 400; line-height: 
   .page-hero { height: 55vh; }
   .hero { background-attachment: scroll; }
   .page-hero { background-attachment: scroll; }
+  .page-hero-content { padding: 0 24px; }
+  .page-hero-title { font-size: clamp(1.8rem, 8vw, 6rem); letter-spacing: 0.08em; }
   .cruise-callout { padding: 24px; flex-direction: column; }
   .featured-body { padding: 28px 24px; }
   .itinerary-card-body { padding: 28px 24px; }
