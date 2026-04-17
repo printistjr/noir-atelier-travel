@@ -1150,6 +1150,14 @@ h1, h2, h3, h4, h5 { font-family: var(--font-d); font-weight: 400; line-height: 
   .gallery-item.tall { grid-row: span 1; }
   nav .nav-links { display: none; }
   .nav-hamburger { display: flex; }
+  .nav-inner { padding: 0 20px; position: relative; }
+  .nav-logo { gap: 0; }
+  .nav-logo-text {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.88rem;
+  }
 }
 
 @media (max-width: 600px) {
