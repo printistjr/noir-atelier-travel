@@ -1,0 +1,6 @@
+# Noir Atelier Travel — Netlify Redirects
+
+# Legacy URL redirects
+/cruises         /services/river-cruises.html   301
+/blog.html       /blog/index.html               301
+/blog            /blog/index.html               301

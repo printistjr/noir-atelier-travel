@@ -1,0 +1,10 @@
+# Videos (hosted on Cloudflare R2)
+images/Home/*.mp4
+
+# Working files
+itineraries/
+pagevideos/
+upload-to-r2.js
+node_modules/
+package-lock.json
+package.json

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Soulful Experience | Noir Atelier Travel</title>
+  <meta name="description" content="The Soulful Experience — luxury river cruises designed for the Black community. Journey through culture, heritage, and connection with Noir Atelier Travel."/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    /* ── Soulful page overrides ── */
+    .soulful-hero {
+      position: relative;
+      height: 90vh;
+      min-height: 560px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .soulful-hero video {
+      display: none;
+    }
+    .soulful-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(10,9,8,0.82) 0%,
+        rgba(10,9,8,0.45) 60%,
+        rgba(10,9,8,0.55) 100%
+      );
+      z-index: 1;
+    }
+    .soulful-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 80px;
+      width: 100%;
+    }
+    .soulful-hero-eyebrow {
+      font-family: var(--font-d);
+      font-size: 0.72rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 20px;
+    }
+    .soulful-hero-title {
+      font-family: var(--font-d);
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      line-height: 1.1;
+      color: var(--text);
+      max-width: 760px;
+      margin-bottom: 28px;
+    }
+    .soulful-hero-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .soulful-hero-sub {
+      font-size: 1.05rem;
+      color: rgba(242,237,227,0.8);
+      line-height: 1.8;
+      max-width: 560px;
+      margin-bottom: 44px;
+    }
+    .soulful-hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    /* Statement band */
+    .soulful-band {
+      background: var(--gold);
+      padding: 24px 40px;
+      text-align: center;
+    }
+    .soulful-band p {
+      font-family: var(--font-d);
+      font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--bg);
+      margin: 0;
+    }
+
+    /* What is Soulful section */
+    .soulful-intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      min-height: 560px;
+    }
+    .soulful-intro-img {
+      overflow: hidden;
+    }
+    .soulful-intro-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.8s;
+    }
+    .soulful-intro-body {
+      background: var(--bg-card);
+      padding: 80px 72px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border: 1px solid var(--border);
+    }
+    @media (max-width: 900px) {
+      .soulful-hero-content { padding: 0 40px; }
+      .soulful-intro-grid { grid-template-columns: 1fr; }
+      .soulful-intro-body { padding: 52px 36px; }
+    }
+    @media (max-width: 600px) {
+      .soulful-hero-content { padding: 0 24px; }
+      .soulful-intro-body { padding: 40px 24px; }
+      .soulful-band { padding: 20px 24px; }
+    }
+
+    /* Pillars */
+    .soulful-pillars {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+    }
+    .soulful-pillar {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 48px 36px;
+      text-align: center;
+      transition: border-color 0.3s;
+    }
+    .soulful-pillar:hover { border-color: rgba(201,168,87,0.45); }
+    .soulful-pillar-num {
+      font-family: var(--font-d);
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--gold);
+      opacity: 0.5;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+    .soulful-pillar h3 {
+      font-family: var(--font-d);
+      font-size: 1.25rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      margin-bottom: 14px;
+    }
+    .soulful-pillar p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+    @media (max-width: 900px) { .soulful-pillars { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .soulful-pillars { grid-template-columns: 1fr; } }
+
+    /* Itinerary spotlight */
+    .soulful-voyages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .soulful-voyage-card {
+      position: relative;
+      overflow: hidden;
+      display: block;
+      text-decoration: none;
+      min-height: 480px;
+    }
+    .soulful-voyage-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s;
+      display: block;
+      position: absolute;
+      inset: 0;
+    }
+    .soulful-voyage-card:hover img { transform: scale(1.06); }
+    .soulful-voyage-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,9,8,0.92) 0%, rgba(10,9,8,0.3) 55%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 36px 32px;
+      transition: background 0.3s;
+    }
+    .soulful-voyage-card:hover .soulful-voyage-overlay {
+      background: linear-gradient(to top, rgba(10,9,8,0.96) 0%, rgba(10,9,8,0.5) 60%, rgba(10,9,8,0.15) 100%);
+    }
+    .soulful-voyage-region {
+      font-family: var(--font-d);
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .soulful-voyage-name {
+      font-family: var(--font-d);
+      font-size: 1.6rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+    .soulful-voyage-meta {
+      font-size: 0.85rem;
+      color: rgba(242,237,227,0.65);
+      margin-bottom: 6px;
+    }
+    .soulful-voyage-price {
+      font-family: var(--font-d);
+      font-size: 1rem;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .soulful-voyage-link {
+      font-family: var(--font-d);
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .soulful-voyage-card:hover .soulful-voyage-link { opacity: 1; }
+    @media (max-width: 900px) { .soulful-voyages-grid { grid-template-columns: 1fr; } .soulful-voyage-card { min-height: 360px; } }
+
+    /* Quote pull */
+    .soulful-quote-band {
+      padding: 100px 40px;
+      text-align: center;
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .soulful-quote-text {
+      font-family: var(--font-d);
+      font-size: clamp(1.5rem, 3vw, 2.4rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.4;
+      color: var(--text);
+      max-width: 900px;
+      margin: 0 auto 28px;
+      letter-spacing: 0.04em;
+    }
+    .soulful-quote-attr {
+      font-family: var(--font-d);
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* Why Soulful matters */
+    .soulful-editorial {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      min-height: 600px;
+    }
+    .soulful-editorial-body {
+      padding: 80px 72px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .soulful-editorial-img { overflow: hidden; }
+    .soulful-editorial-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    @media (max-width: 900px) {
+      .soulful-editorial { grid-template-columns: 1fr; }
+      .soulful-editorial-body { padding: 52px 36px; }
+      .soulful-editorial-img { min-height: 360px; }
+    }
+    @media (max-width: 600px) { .soulful-editorial-body { padding: 40px 24px; } }
+  </style>
+</head>
+<body data-page="soulful">
+
+<!-- ======== HERO ======== -->
+<section class="soulful-hero" style="background-image:url('images/Home/pexels-spencphoto-28184032-4k.jpg'); background-size:cover; background-position:center;">
+  <div class="soulful-hero-overlay"></div>
+  <div class="soulful-hero-content">
+    <span class="soulful-hero-eyebrow">The Soulful Experience</span>
+    <h1 class="soulful-hero-title">A Journey of<br><em>Culture &amp; Connection</em></h1>
+    <p class="soulful-hero-sub">River cruises curated specifically for the Black community, honoring our heritage, celebrating our joy, and connecting us to the world's most meaningful destinations.</p>
+    <div class="soulful-hero-ctas">
+      <a href="work-with-us.html" class="btn">Plan Your Soulful Journey</a>
+      <a href="#voyages" class="btn btn-white">Explore Itineraries</a>
+    </div>
+  </div>
+</section>
+
+<!-- ======== GOLD BAND ======== -->
+<div class="soulful-band">
+  <p>Exclusively Curated &nbsp;·&nbsp; Culturally Affirming &nbsp;·&nbsp; Deeply Personal &nbsp;·&nbsp; Aboard AmaWaterways</p>
+</div>
+
+<!-- ======== WHAT IS THE SOULFUL EXPERIENCE ======== -->
+<section class="section" style="padding: 0;">
+  <div class="soulful-intro-grid">
+    <div class="soulful-intro-img">
+      <img src="images/Home/preview_nubian_girl.jpg" alt="The Soulful Experience"/>
+    </div>
+    <div class="soulful-intro-body">
+      <span class="section-label" style="display:block;margin-bottom:20px;">What Is It?</span>
+      <h2 style="font-size: clamp(1.8rem, 2.8vw, 2.8rem); font-weight:400; letter-spacing:0.06em; margin-bottom: 28px; line-height:1.15;">More Than a Cruise.<br>A Cultural Homecoming.</h2>
+      <p style="color:var(--text-muted);line-height:1.9;margin-bottom:20px;">The Soulful Experience is a series of specially curated river cruise departures designed with the Black travel community at the center. In partnership with AmaWaterways, the world's leading luxury river cruise line, we craft departures that go beyond sightseeing.</p>
+      <p style="color:var(--text-muted);line-height:1.9;margin-bottom:20px;">Expect culturally immersive excursions, curated programming that connects you to Black history and heritage in each destination, and the rare joy of traveling surrounded by a community that reflects your own story.</p>
+      <p style="color:var(--text-muted);line-height:1.9;margin-bottom:36px;">From the ancient civilizations of the Nile to the vibrant wine culture of Portugal, every Soulful departure is designed to make you feel not just welcome, but truly celebrated.</p>
+      <a href="work-with-us.html" class="btn">Reserve Your Spot</a>
+    </div>
+  </div>
+</section>
+
+<!-- ======== FOUR PILLARS ======== -->
+<section class="section bg-alt border-top border-bottom">
+  <div class="container">
+    <div class="section-head center">
+      <span class="section-label">The Soulful Difference</span>
+      <div class="rule-gold"></div>
+      <h2>What Makes It Soulful</h2>
+    </div>
+    <div class="soulful-pillars" style="margin-top: 56px;">
+      <div class="soulful-pillar">
+        <div class="soulful-pillar-num">01</div>
+        <h3>Community Departures</h3>
+        <p>Travel with a curated group of like-minded Black travelers. The connections made onboard often last a lifetime, and the shared experience amplifies every moment.</p>
+      </div>
+      <div class="soulful-pillar">
+        <div class="soulful-pillar-num">02</div>
+        <h3>Cultural Programming</h3>
+        <p>Exclusive onboard and shore experiences highlighting Black history, diaspora connections, local art, and cultural heritage at each port of call.</p>
+      </div>
+      <div class="soulful-pillar">
+        <div class="soulful-pillar-num">03</div>
+        <h3>Expert Curation</h3>
+        <p>Every detail, from ship selection and cabin categories to excursion packages and special dinners, is personally curated by Noir Atelier Travel with your community in mind.</p>
+      </div>
+      <div class="soulful-pillar">
+        <div class="soulful-pillar-num">04</div>
+        <h3>Celebration &amp; Joy</h3>
+        <p>Soulful departures are intentionally festive. Expect curated music, themed evenings, milestone recognitions, and an atmosphere designed to celebrate Black excellence in motion.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== FEATURED VOYAGES ======== -->
+<section class="section" id="voyages">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-label">Soulful Itineraries</span>
+      <div class="rule-gold-left"></div>
+      <h2>Explorer Cruises with<br>Soulful Experiences</h2>
+    </div>
+  </div>
+  <div class="soulful-voyages-grid" style="margin-top: 48px;">
+
+    <a href="douro.html" class="soulful-voyage-card">
+      <img src="images/Home/enticingdouro_portugal_porto_ss_302537321_dailyprogram.jpg" alt="Enticing Douro"/>
+      <div class="soulful-voyage-overlay">
+        <span class="soulful-voyage-region">Portugal &amp; Spain</span>
+        <div class="soulful-voyage-name">Enticing Douro</div>
+        <p class="soulful-voyage-meta">10 Nights · Roundtrip Porto</p>
+        <p class="soulful-voyage-price">from $5,129</p>
+        <span class="soulful-voyage-link">View Itinerary →</span>
+      </div>
+    </a>
+
+    <a href="mekong.html" class="soulful-voyage-card">
+      <img src="images/Mekong/16019013-mekong-river-near-luang-prabang-4k.jpg" alt="Riches of the Mekong"/>
+      <div class="soulful-voyage-overlay">
+        <span class="soulful-voyage-region">Vietnam &amp; Cambodia</span>
+        <div class="soulful-voyage-name">Riches of the Mekong</div>
+        <p class="soulful-voyage-meta">14 Nights · Siem Reap to Ho Chi Minh</p>
+        <p class="soulful-voyage-price">from $5,032</p>
+        <span class="soulful-voyage-link">View Itinerary →</span>
+      </div>
+    </a>
+
+    <a href="chobe.html" class="soulful-voyage-card">
+      <img src="images/Africa/chobe-4k.jpg" alt="Rivers &amp; Rails of Africa"/>
+      <div class="soulful-voyage-overlay">
+        <span class="soulful-voyage-region">South Africa · Botswana · Zimbabwe</span>
+        <div class="soulful-voyage-name">Rivers &amp; Rails of Africa</div>
+        <p class="soulful-voyage-meta">12 Nights · Cape Town to Pretoria</p>
+        <span class="soulful-voyage-link">View Itinerary →</span>
+      </div>
+    </a>
+
+    <a href="dutch-belgium.html" class="soulful-voyage-card">
+      <img src="images/Dutch/4434443-4k.jpg" alt="Best of Holland &amp; Belgium"/>
+      <div class="soulful-voyage-overlay">
+        <span class="soulful-voyage-region">Netherlands &amp; Belgium</span>
+        <div class="soulful-voyage-name">Best of Holland &amp; Belgium</div>
+        <p class="soulful-voyage-meta">7 Nights · Roundtrip Amsterdam</p>
+        <p class="soulful-voyage-price">from $3,539</p>
+        <span class="soulful-voyage-link">View Itinerary →</span>
+      </div>
+    </a>
+
+    <a href="nile.html" class="soulful-voyage-card">
+      <img src="images/Egypt/The-Nile-River-Egypt-Tours-Portal.jpg" alt="Pharaohs &amp; Pyramids — Nile"/>
+      <div class="soulful-voyage-overlay">
+        <span class="soulful-voyage-region">Egypt</span>
+        <div class="soulful-voyage-name">Pharaohs &amp; Pyramids</div>
+        <p class="soulful-voyage-meta">7 Nights · Cairo to Luxor</p>
+        <span class="soulful-voyage-link">View Itinerary →</span>
+      </div>
+    </a>
+
+    <a href="rhine.html" class="soulful-voyage-card">
+      <img src="images/Rhine/rhine-gorge_18711599-4k.jpg" alt="Rhine &amp; Moselle"/>
+      <div class="soulful-voyage-overlay">
+        <span class="soulful-voyage-region">Germany · France · Switzerland</span>
+        <div class="soulful-voyage-name">Rhine &amp; Moselle Discovery</div>
+        <p class="soulful-voyage-meta">7–10 Nights</p>
+        <span class="soulful-voyage-link">View Itinerary →</span>
+      </div>
+    </a>
+
+  </div>
+  <div class="container">
+    <div class="center" style="margin-top: 56px;">
+      <a href="services/river-cruises.html" class="btn">View All Voyages</a>
+    </div>
+  </div>
+</section>
+
+<!-- ======== PULL QUOTE ======== -->
+<div class="soulful-quote-band">
+  <blockquote class="soulful-quote-text">
+    "Traveling as a group of Black people, we didn't just see Europe. We owned every room we walked into. The Soulful Experience gave us permission to fully show up."
+  </blockquote>
+  <p class="soulful-quote-attr">Soulful Experience Traveler, Douro Valley 2024</p>
+</div>
+
+<!-- ======== WHY IT MATTERS ======== -->
+<section class="section" style="padding: 0;">
+  <div class="soulful-editorial">
+    <div class="soulful-editorial-body">
+      <span class="section-label" style="display:block;margin-bottom:20px;">Why It Matters</span>
+      <h2 style="font-size: clamp(1.8rem, 2.8vw, 2.8rem); font-weight:400; letter-spacing:0.06em; margin-bottom: 28px; line-height:1.2;">Travel Is a Radical<br>Act of Self-Reclamation</h2>
+      <p style="color:var(--text-muted);line-height:1.9;margin-bottom:20px;">For generations, Black travelers have been made to feel like guests in luxury spaces, tolerated but rarely truly welcomed. The Soulful Experience exists to change that narrative.</p>
+      <p style="color:var(--text-muted);line-height:1.9;margin-bottom:20px;">When you sail on a Soulful departure, you are not an afterthought. The programming, the cultural stops, the onboard conversations: all of it is designed with your story at the center. You see yourself reflected in the experiences curated for you.</p>
+      <p style="color:var(--text-muted);line-height:1.9;margin-bottom:36px;">This is what we mean when we say luxury travel should be culturally affirming. Not just beautiful places, but places where you arrive as your full self.</p>
+      <a href="about.html" class="btn">Our Story</a>
+    </div>
+    <div class="soulful-editorial-img">
+      <img src="images/Destinations/portugaldest.avif" alt="The Soulful Experience — Why It Matters"/>
+    </div>
+  </div>
+</section>
+
+<!-- ======== TESTIMONIALS VIDEO ======== -->
+<section class="section testimonial-section">
+  <div class="container-sm center">
+    <span class="section-label">Our Travelers' Voices</span>
+    <div class="rule-gold"></div>
+    <p class="testimonial-quote">Hear directly from Soulful Experience travelers: what it felt like to sail together, to discover new cultures, and to return home transformed by the journey.</p>
+    <p class="video-label">Video has sound. Click to play.</p>
+    <div class="video-wrap">
+      <video controls poster="images/Home/preview_soulful_hat.jpg">
+        <source src="https://pub-d2924818cbad42bcbf6ad004b9a500c7.r2.dev/13%20-%202023_Soulful%20Experiences%20Testimonials_Final_2025%20Rework.mp4" type="video/mp4"/>
+        Your browser does not support video playback.
+      </video>
+    </div>
+  </div>
+</section>
+
+<!-- ======== PARALLAX ======== -->
+<div class="parallax-banner" style="background-image:url('images/Home/nsplsh_726a74596b563848784e59~mv2_d_5140_3424_s_4_2.avif');"></div>
+
+<!-- ======== WHAT'S INCLUDED ======== -->
+<section class="section bg-alt border-top border-bottom">
+  <div class="container">
+    <div class="section-head center">
+      <span class="section-label">The Full Picture</span>
+      <div class="rule-gold"></div>
+      <h2>What's Included in Every<br>Soulful Departure</h2>
+    </div>
+    <div class="grid-3" style="margin-top: 56px; gap: 2px;">
+      <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 44px 36px;">
+        <div style="color: var(--gold); margin-bottom: 20px;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        </div>
+        <h3 style="font-family:var(--font-d);font-size:1.2rem;font-weight:400;letter-spacing:0.08em;margin-bottom:14px;">Luxury Ship &amp; Cabin</h3>
+        <p style="font-size:0.93rem;color:var(--text-muted);line-height:1.8;">Premium AmaWaterways cabins with river-view or balcony options. All meals, fine wines, and onboard entertainment included.</p>
+      </div>
+      <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 44px 36px;">
+        <div style="color: var(--gold); margin-bottom: 20px;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h3 style="font-family:var(--font-d);font-size:1.2rem;font-weight:400;letter-spacing:0.08em;margin-bottom:14px;">Curated Shore Excursions</h3>
+        <p style="font-size:0.93rem;color:var(--text-muted);line-height:1.8;">Specially selected tours at each port with a focus on cultural heritage, local history, and Black diaspora connections in the region.</p>
+      </div>
+      <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 44px 36px;">
+        <div style="color: var(--gold); margin-bottom: 20px;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M9 19V6l12-3v13M9 19c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm12-3c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zM9 10l12-3"/></svg>
+        </div>
+        <h3 style="font-family:var(--font-d);font-size:1.2rem;font-weight:400;letter-spacing:0.08em;margin-bottom:14px;">Cultural Programming</h3>
+        <p style="font-size:0.93rem;color:var(--text-muted);line-height:1.8;">Curated onboard evenings with music, cultural discussions, celebration dinners, and programming that honors the spirit of the journey.</p>
+      </div>
+      <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 44px 36px;">
+        <div style="color: var(--gold); margin-bottom: 20px;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 style="font-family:var(--font-d);font-size:1.2rem;font-weight:400;letter-spacing:0.08em;margin-bottom:14px;">Community Travel</h3>
+        <p style="font-size:0.93rem;color:var(--text-muted);line-height:1.8;">Sail with a curated group of like-minded travelers. Soulful departures are designed for community; you'll arrive as strangers and leave as family.</p>
+      </div>
+      <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 44px 36px;">
+        <div style="color: var(--gold); margin-bottom: 20px;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 style="font-family:var(--font-d);font-size:1.2rem;font-weight:400;letter-spacing:0.08em;margin-bottom:14px;">Dedicated Travel Support</h3>
+        <p style="font-size:0.93rem;color:var(--text-muted);line-height:1.8;">From booking to final farewell, Noir Atelier Travel is with you every step. Pre-departure support, on-trip assistance, and post-trip follow-up included.</p>
+      </div>
+      <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 44px 36px;">
+        <div style="color: var(--gold); margin-bottom: 20px;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <h3 style="font-family:var(--font-d);font-size:1.2rem;font-weight:400;letter-spacing:0.08em;margin-bottom:14px;">Milestone Recognition</h3>
+        <p style="font-size:0.93rem;color:var(--text-muted);line-height:1.8;">Celebrating a birthday, anniversary, or retirement on a Soulful departure? Let us know and we'll make sure your milestone is honored in style.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== CTA ======== -->
+<div class="cta-banner">
+  <div class="container-sm">
+    <span class="section-label" style="display:block;margin-bottom:16px;">Your Seat Is Waiting</span>
+    <h2>Begin Your Soulful Journey</h2>
+    <p>Soulful departures fill quickly. Submit your inquiry today and let us match you to the perfect voyage for your travel dreams, group size, and budget.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="work-with-us.html" class="btn">Plan Your Journey</a>
+      <a href="services/river-cruises.html" class="btn btn-white">View All Voyages</a>
+    </div>
+  </div>
+</div>
+
+<script src="/js/nav.js"></script>
+</body>
+</html>

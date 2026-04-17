@@ -1,0 +1,4 @@
+Fonts
+
+Header & Titles: Cormorant Garamond Light - Bold
+Body: EB Garamond - Regular
