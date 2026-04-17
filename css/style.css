@@ -1156,7 +1156,6 @@ h1, h2, h3, h4, h5 { font-family: var(--font-d); font-weight: 400; line-height: 
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 0.88rem;
   }
 }
 
