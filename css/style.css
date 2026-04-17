@@ -1194,6 +1194,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-d); font-weight: 400; line-height: 
 .nav-mobile-cta {
   margin-top: 8px;
   text-align: center;
+  justify-content: center;
   background: var(--gold);
   color: var(--bg) !important;
   border-color: var(--gold) !important;
